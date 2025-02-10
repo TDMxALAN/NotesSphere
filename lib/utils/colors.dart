@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   //primary colors
-  static const Color kFabColor = Color.fromARGB(255, 204, 17, 237);
+  static const Color kFabColor = Colors.blueGrey;
+  // static const Color kFabColor = Color.fromARGB(255, 204, 17, 237);
   static Color kBgColor = const Color(0xff202326);
   static Color kCardColor = const Color(0xff2F3235);
   static Color kWhiteColor = const Color.fromARGB(255, 255, 255, 255);
