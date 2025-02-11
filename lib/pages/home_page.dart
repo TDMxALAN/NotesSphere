@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_sphere/utils/constants.dart';
 import 'package:notes_sphere/utils/router.dart';
 import 'package:notes_sphere/utils/text_styles.dart';
@@ -18,8 +19,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Notes',
-          style: AppTextStyles.appTitle,
+          'Notes App',
+          style: GoogleFonts.lobster(
+            fontSize: 40,
+            fontWeight: FontWeight.normal,
+            color: Colors.cyan,
+          ),
         ),
       ),
       body: Padding(

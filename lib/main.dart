@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:notes_sphere/models/note_model.dart';
+import 'package:notes_sphere/models/todo_model.dart';
 import 'package:notes_sphere/utils/router.dart';
 import 'package:notes_sphere/utils/theme_data.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //initialize hive
+  await Hive.initFlutter();
+
+  //register adapters
+  Hive.registerAdapter(NoteAdapter());
+  Hive.registerAdapter(TodoAdapter());
+
+  //open hive boxes
+  await Hive.openBox('notes');
+  await Hive.openBox('todos');
+
   runApp(MyApp());
 }
 
@@ -15,9 +30,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'NotesSphere',
       debugShowCheckedModeBanner: false,
-      theme: ThemeClass.darkTheme.copyWith(
-          textTheme: GoogleFonts.dmSansTextTheme(Theme.of(context).textTheme)),
       routerConfig: AppRouter.router,
+      theme: ThemeClass.darkTheme,
     );
   }
 }
