@@ -53,4 +53,40 @@ class NoteService {
     }
     return notesByCategory;
   }
+
+  //method to get notes from category
+  Future<List<Note>> getNotesByCategoryName(String category) async {
+    final dynamic allNotes = await _myBox.get('notes');
+    final List<Note> notes = [];
+
+    for (final note in allNotes) {
+      if (note.category == category) {
+        notes.add(note);
+      }
+    }
+    return notes;
+  }
+
+  //edit a note
+  Future<void> updateNote(Note note) async {
+    try {
+      final dynamic allNotes = await _myBox.get('notes');
+      final int index = allNotes.indexWhere((e) => e.id == note);
+      allNotes[index] = note;
+      await _myBox.put('notes', allNotes);
+    } catch (err) {
+      print(err.toString());
+    }
+  }
+
+  //method to delete a note
+  Future<void> deleteNote(String noteID) async {
+    try {
+      final dynamic allNotes = await _myBox.get('notes');
+      allNotes.removeWhere((e) => e.id == noteID);
+      await _myBox.put('notes', allNotes);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

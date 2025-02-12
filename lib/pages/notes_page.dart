@@ -81,35 +81,35 @@ class _NotesPageState extends State<NotesPage> {
         child: Column(
           children: [
             const SizedBox(height: 8),
-            allNotes.isEmpty
-                ? SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: Center(
-                      child: Text(
-                        'No notes are available , click the plus button to add some...',
-                        style: AppTextStyles.appDescription,
-                      ),
-                    ),
-                  )
-                : GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: AppConstants.kDefaultPadding,
-                      mainAxisExtent: AppConstants.kDefaultPadding,
-                      childAspectRatio: 6 / 4,
-                    ),
-                    itemCount: noteWithCategory.length,
-                    itemBuilder: (context, index) {
-                      return NotesCard(
-                        noteCategory: noteWithCategory.keys.elementAt(index),
-                        noOfNotes:
-                            noteWithCategory.values.elementAt(index).length,
-                      );
-                    },
-                  )
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: AppConstants.kDefaultPadding,
+                mainAxisSpacing: AppConstants.kDefaultPadding,
+                childAspectRatio: 6 / 4,
+              ),
+              itemCount: noteWithCategory.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    //go to notes by category page
+                    AppRouter.router.push('/category',
+                        extra: noteWithCategory.keys.elementAt(index));
+                  },
+                  child: NotesCard(
+                    noteCategory: noteWithCategory.keys.elementAt(index),
+                    noOfNotes: noteWithCategory.keys.elementAt(index).length,
+                  ),
+                );
+              },
+            )
+
+            //!debugging purpose
+            // : NotesCard(
+            //     noteCategory: noteWithCategory.keys.elementAt(0),
+            //     noOfNotes: noteWithCategory.keys.elementAt(0).length),
           ],
         ),
       ),

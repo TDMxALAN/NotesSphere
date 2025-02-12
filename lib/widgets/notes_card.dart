@@ -33,12 +33,12 @@ class NotesCard extends StatelessWidget {
           Text(
             noteCategory,
             style:
-                AppTextStyles.appSubtitle.copyWith(fontWeight: FontWeight.w500),
+                AppTextStyles.appSubtitle.copyWith(fontWeight: FontWeight.w700),
           ),
           Text(
             '$noOfNotes notes',
             style: AppTextStyles.appBody.copyWith(
-              color: AppColors.kWhiteColor,
+              color: Colors.blueGrey,
             ),
           ),
         ],

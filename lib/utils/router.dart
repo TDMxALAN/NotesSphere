@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes_sphere/pages/home_page.dart';
+import 'package:notes_sphere/pages/note_by_category.dart';
 import 'package:notes_sphere/pages/notes_page.dart';
 import 'package:notes_sphere/pages/todo_page.dart';
 
@@ -27,6 +28,16 @@ class AppRouter {
         name: 'todos',
         path: '/todos',
         builder: (context, state) => const TodoPage(),
+      ),
+
+      //notes by category
+      GoRoute(
+        name: 'category',
+        path: '/category',
+        builder: (context, state) {
+          final String category = state.extra as String;
+          return NoteByCategory(category: category);
+        },
       )
     ],
   );
