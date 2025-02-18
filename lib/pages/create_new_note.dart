@@ -61,50 +61,90 @@ class _CreateNewNotePageState extends State<CreateNotePage> {
                     //dropdown
                     Column(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: DropdownButtonFormField(
-                              style: TextStyle(
-                                color: AppColors.kWhiteColor,
-                                fontFamily: GoogleFonts.dmSans().fontFamily,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20,
-                              ),
-                              isExpanded: false,
-                              hint: Text('select category'),
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(
-                                    color:
-                                        AppColors.kWhiteColor.withOpacity(0.1),
-                                    width: 2,
-                                  ),
+                        widget.isNewCategory
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    AppConstants.kDefaultPadding,
-                                  ),
-                                  borderSide: BorderSide(
+                                child: TextFormField(
+                                  style: TextStyle(
                                     color: AppColors.kWhiteColor,
-                                    width: 1,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  decoration: InputDecoration(
+                                    hintText: "New Category Name",
+                                    hintStyle: TextStyle(
+                                      color: AppColors.kWhiteColor
+                                          .withOpacity(0.5),
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily:
+                                          GoogleFonts.dmSans().fontFamily,
+                                      fontSize: 20,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: BorderSide(
+                                        color: AppColors.kWhiteColor
+                                            .withOpacity(0.1),
+                                        width: 2,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: BorderSide(
+                                        color: AppColors.kWhiteColor,
+                                        width: 3,
+                                      ),
+                                    ),
                                   ),
                                 ),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: DropdownButtonFormField(
+                                    style: TextStyle(
+                                      color: AppColors.kWhiteColor,
+                                      fontFamily:
+                                          GoogleFonts.dmSans().fontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
+                                    ),
+                                    isExpanded: false,
+                                    hint: Text('select category'),
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                          color: AppColors.kWhiteColor
+                                              .withOpacity(0.1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          AppConstants.kDefaultPadding,
+                                        ),
+                                        borderSide: BorderSide(
+                                          color: AppColors.kWhiteColor,
+                                          width: 1,
+                                        ),
+                                      ),
+                                    ),
+                                    items: categories.map((String category) {
+                                      return DropdownMenuItem<String>(
+                                        alignment: Alignment.centerLeft,
+                                        value: category,
+                                        child: Text(
+                                          category,
+                                          style: AppTextStyles.appButton,
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {}),
                               ),
-                              items: categories.map((String category) {
-                                return DropdownMenuItem<String>(
-                                  alignment: Alignment.centerLeft,
-                                  value: category,
-                                  child: Text(
-                                    category,
-                                    style: AppTextStyles.appButton,
-                                  ),
-                                );
-                              }).toList(),
-                              onChanged: (value) {}),
-                        ),
                         SizedBox(height: 10),
 
                         //title field
