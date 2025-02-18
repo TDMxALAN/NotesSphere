@@ -11,7 +11,7 @@ class NoteService {
       content:
           'Welcome to Notes. This app helps you quickly jot down ideas, to-do lists, and reminders. Tap the plus button to create a new note, swipe left to delete, and use the search function to find notes easily.',
       date: DateTime.now(),
-    )
+    ),
   ];
 
   //create db ref
@@ -88,5 +88,19 @@ class NoteService {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  //method to get all cats
+  Future<List<String>> getAllCategories() async {
+    final List<String> categories = [];
+    final dynamic allNotes = await _myBox.get('notes');
+
+    for (final note in allNotes) {
+      if (!categories.contains(note.category)) {
+        categories.add(note.category);
+      }
+    }
+
+    return categories;
   }
 }
