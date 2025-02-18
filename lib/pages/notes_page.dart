@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:notes_sphere/models/note_model.dart';
 import 'package:notes_sphere/services/note_services.dart';
@@ -5,6 +7,7 @@ import 'package:notes_sphere/utils/colors.dart';
 import 'package:notes_sphere/utils/constants.dart';
 import 'package:notes_sphere/utils/router.dart';
 import 'package:notes_sphere/utils/text_styles.dart';
+import 'package:notes_sphere/widgets/bottom_sheet.dart';
 import 'package:notes_sphere/widgets/notes_card.dart';
 
 class NotesPage extends StatefulWidget {
@@ -50,6 +53,33 @@ class _NotesPageState extends State<NotesPage> {
     });
   }
 
+  //open bottom sheet
+  void openBottomSheet() {
+    showModalBottomSheet(
+      barrierColor: Colors.black.withOpacity(0.6),
+      //Colors.black.withOpacity(0.5),
+      context: context,
+      builder: (context) {
+        return CategoryInputBottomSheet(
+          onNewNote: () {
+            Navigator.pop(context);
+            AppRouter.router.push(
+              '/create-note',
+              extra: false,
+            );
+          },
+          onNewCategory: () {
+            Navigator.pop(context);
+            AppRouter.router.push(
+              '/create-note',
+              extra: true,
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,9 +98,13 @@ class _NotesPageState extends State<NotesPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        //todo : on pressed
+        onPressed: openBottomSheet,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
         child: Icon(
           Icons.add,
           color: AppColors.kWhiteColor,
